@@ -1,0 +1,11 @@
+# Fonte do chart e dos valores para o HelmRelease. Fica junto do HelmRelease para
+# que os dois existam no mesmo cluster e namespace, onde quer que o NKP aplique esta pasta.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: scuba-chart
+spec:
+  interval: 1m
+  url: https://github.com/miriamcsn/scuba-gitops
+  ref:
+    branch: main

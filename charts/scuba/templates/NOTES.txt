@@ -1,0 +1,14 @@
+Scuba Dive Log instalado.
+
+Release:   {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+Backend:   {{ include "scuba.image" (dict "root" . "image" .Values.backend.image "name" "backend") }}
+Frontend:  {{ include "scuba.image" (dict "root" . "image" .Values.frontend.image "name" "frontend") }}
+
+Acompanhe os pods:
+  kubectl -n {{ .Release.Namespace }} get pods -w
+
+Descubra o IP do LoadBalancer do Traefik:
+  kubectl get svc -n kommander kommander-traefik
+
+Abra https://<IP-DO-LOADBALANCER>/ e registre um mergulhador, um ponto de mergulho e um mergulho.

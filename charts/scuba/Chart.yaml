@@ -1,0 +1,6 @@
+apiVersion: v2
+name: scuba
+description: Scuba Dive Log para a demo de CI/CD no NKP (backend FastAPI, frontend nginx e MySQL com volume persistente)
+type: application
+version: 0.3.0
+appVersion: "0.3.0"

@@ -1,0 +1,27 @@
+# Valores do ambiente "demo".
+# O CI grava as tags das imagens nas linhas marcadas com "# backend-tag" e
+# "# frontend-tag": mantenha esses comentários, o script de CI depende deles.
+
+image:
+  registry: <HARBOR_HOST>/scuba
+
+backend:
+  image:
+    tag: "initial" # backend-tag
+  # Cena do NKP Insights: descomente as linhas abaixo, faça commit e push.
+  # O CD aplica e os achados de securityContext do backend somem do Insights.
+  # securityContext:
+  #   runAsNonRoot: true
+  #   allowPrivilegeEscalation: false
+  #   capabilities:
+  #     drop: ["ALL"]
+
+frontend:
+  image:
+    tag: "initial" # frontend-tag
+  # Cena do NKP Insights: idem para o frontend.
+  # securityContext:
+  #   runAsNonRoot: true
+  #   allowPrivilegeEscalation: false
+  #   capabilities:
+  #     drop: ["ALL"]

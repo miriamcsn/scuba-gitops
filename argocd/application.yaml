@@ -1,0 +1,27 @@
+# Application do Argo CD: mesmo chart e mesmos valores, no namespace demo-argo.
+# Aplique com: kubectl apply -f argocd/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: scuba
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/miriamcsn/scuba-gitops
+    targetRevision: main
+    path: charts/scuba
+    helm:
+      releaseName: scuba
+      valueFiles:
+        - values.yaml
+        - ../../envs/demo/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-argo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

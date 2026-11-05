@@ -1,0 +1,27 @@
+# Instala o chart "scuba" com os valores do ambiente demo, usando o Flux embarcado do NKP.
+# A cada commit no repositório (por exemplo, o CI gravando novas tags), o Flux
+# gera uma nova versão do chart e faz o upgrade do release.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: scuba
+spec:
+  interval: 5m
+  releaseName: scuba
+  chart:
+    spec:
+      chart: ./charts/scuba
+      reconcileStrategy: Revision
+      sourceRef:
+        kind: GitRepository
+        name: scuba-chart
+      # Os arquivos são mesclados em ordem: padrões do chart e, por cima, o ambiente.
+      valuesFiles:
+        - ./charts/scuba/values.yaml
+        - ./envs/demo/values.yaml
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3

@@ -1,0 +1,5 @@
+.DS_Store
+
+# Contexto local do Claude Code (não versionar)
+CLAUDE.md
+.claude/

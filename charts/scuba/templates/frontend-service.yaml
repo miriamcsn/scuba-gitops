@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-frontend
+  labels:
+    {{- include "scuba.labels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.frontend.servicePort }}
+      targetPort: http
+      protocol: TCP
+  selector:
+    {{- include "scuba.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
